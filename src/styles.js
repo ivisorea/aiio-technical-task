@@ -32,6 +32,9 @@ export const SubContainer = styled.div`
     border: 5px solid #e9e7e7;
     width: 100%;
     margin-bottom: .4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
 `
 export const Article = styled.article`
@@ -45,7 +48,17 @@ export const ArticleWrapper = styled.div`
 `
 export const Wrapper = styled.div`
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
     padding: .4rem;
+    width: 100%;
+`
+export const SubCategoriesContainer = styled(ProductsContainer)`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #34464d;
+    padding: 1rem;
+`
+export const SubCategoriesWrapper = styled(SubContainer)`
+    background-color: #dedede;
 `
