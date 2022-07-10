@@ -1,23 +1,25 @@
 import { Button, ProductsContainer, HeaderTable, SubContainer, Article, Wrapper, ButtonWrapper, ArticleWrapper } from '../styles'
 import { SubCategories } from './SubCategories'
 import {TiPlus} from 'react-icons/ti'
-import { useAppContext } from '../AppContext/appContext'
+import AppState, { useAppContext } from '../AppContext/appContext'
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form'
+import { Modal } from './Modal';
+import { useState } from 'react'
+
 
 export const Products = () => {
-    const { products, loading } = useAppContext(true)
+    const { products, loading, setOpenModal, openModal} = useAppContext(AppState)
     const methods = useForm();
     const {register, handleSubmit} = methods;
     useFieldArray({
         control: methods.control,
         name: 'products',
     });
+    const [selectedData, setSelectedData] = useState({})
 
    const onSubmit = (data) => {
-         const products = data.products.filter(product => product.name)
-         const subCategories = data.subCategories.filter(subCategory => subCategory.name)
-         const subProducts = data.subProducts.filter(subProduct => subProduct.name)
-            console.log(products, subCategories, subProducts)
+        setSelectedData(data)
+        setOpenModal(true)
     }
 
   return (
@@ -56,6 +58,26 @@ export const Products = () => {
                 </ProductsContainer>
             </form>
         </FormProvider>
+        {
+            !!openModal && 
+                <Modal>
+                    <h3>Products</h3>
+                    <p>{selectedData.products.filter(product => product.name).map(product => product.name).join(', ')}</p>
+                    <h3>Sub categories</h3>
+                    <p>{selectedData.subCategories.filter(subCategory => subCategory.name).map(subCategory => subCategory.name).join(', ')}</p>
+                    <h3>Sub products</h3>
+                    <p>{selectedData.subProducts.filter(subProduct => subProduct.name).map(subProduct => subProduct.name).join(', ')}</p>
+                    <div style={{display: 'flex', justifyContent: 'flex-end' }}>
+                    <button 
+                        style={{backgroundColor: 'white', color: '#5774b6', fontWeight: 'bold', border: 'none', marginTop: '1rem', }}
+                        onClick={() => setOpenModal(false)}>
+                            SAVE
+                    </button>
+                    </div>
+                </Modal>
+                    
+    }
+            
     </>
   )
 }

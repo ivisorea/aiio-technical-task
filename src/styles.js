@@ -65,3 +65,19 @@ export const SubCategoriesWrapper = styled(SubContainer)`
 export const SubProductsContainer = styled(SubCategoriesContainer)`
     background-color: #9c9c9c;
 `
+export const ModalContainer = styled.div`
+    background-color: #fdfdfd;
+    border-radius: 3px;
+    box-shadow: 0px 5px 50px rgba(189, 191, 195, 0.25);
+    padding: 1.5rem;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: auto;
+`

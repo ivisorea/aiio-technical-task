@@ -7,6 +7,7 @@ export const useAppContext = () => useContext(AppContext)
 const AppState = ({children}) => {
     const [products, setProducts] = useState([])
     const [loading, setLoading] = useState(false)
+    const [openModal, setOpenModal] = useState(false)
     
     useEffect(() => {
         setLoading(true)
@@ -25,7 +26,7 @@ const AppState = ({children}) => {
 
 
     return (
-        <AppContext.Provider value={{products, loading}}>
+        <AppContext.Provider value={{products, loading, openModal, setOpenModal}}>
         {children}
         </AppContext.Provider>
     )
