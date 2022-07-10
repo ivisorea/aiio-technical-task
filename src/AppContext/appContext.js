@@ -22,7 +22,8 @@ const AppState = ({children}) => {
         console.log(error)
         }
     }, [])
-    
+
+
     return (
         <AppContext.Provider value={{products, loading}}>
         {children}
