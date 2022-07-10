@@ -1,33 +1,31 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
-import { Button, SubCategoriesContainer, HeaderTable, SubCategoriesWrapper, Article, Wrapper, ButtonWrapper, ArticleWrapper, SubContainer } from '../styles'
+import { useState} from 'react'
+import { Button, 
+        SubCategoriesContainer, 
+        HeaderTable, 
+        SubCategoriesWrapper, 
+        Article, 
+        Wrapper,  
+        ButtonWrapper, 
+        ArticleWrapper} from '../styles'
 import { TiPlus } from 'react-icons/ti'
 import { BsChevronDown } from 'react-icons/bs'
+import { useFilterData } from '../AppContext/useFilterData'
+import { SubProducts } from './SubProducts'
+import { useFieldArray, useFormContext } from 'react-hook-form'
 
 export const SubCategories = ({productId}) => {
-    const [subCategories, setSubCategories] = useState([])
-    const [loading, setLoading] = useState(true)
+    
     const [suggestions, setSuggestions] = useState([])
     const [searchValue, setSearchValue] = useState('')
-    
-    useEffect(() => {
-        try {
-            fetch('http://localhost:3002/subcatergories')
-                .then(res => res.json())
-                .then(data => {
-                    // eslint-disable-next-line array-callback-return
-                    setSubCategories(data.filter(subCategory => subCategory.productId == productId))
-                    setLoading(false)
-                })
-        } catch (error) {
-            console.log(error)
-        }
-    }, [productId])
+    const { data, loading } = useFilterData('http://localhost:3002/subcatergories', productId)
+    const { register } = useFormContext();
+    useFieldArray({name: 'subCategories' });
 
     const onChangeHandler = (searchValue) => {
         let matches = []
         if (searchValue.length > 0) {
-            matches = subCategories.filter(subCategory => subCategory.subCategoryName.toLowerCase().includes(searchValue.toLowerCase()))
+            matches = data.filter(subCategory => subCategory.subCategoryName.toLowerCase().includes(searchValue.toLowerCase()))
         }
         setSuggestions(matches)
         setSearchValue(searchValue)
@@ -65,15 +63,19 @@ export const SubCategories = ({productId}) => {
                         ))
                     ):(
                         loading ? <h1>Loading...</h1> :
-                        subCategories.map(subCategory => (
+                        data.map(subCategory => (
                             <Wrapper key={subCategory.subCategoryId}>
                                 <div style={{display : 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 1rem', marginBottom: '0.4rem'}}>
                                     <label>{subCategory.subCategoryName}</label>
                                     <input type="checkbox" 
-                                        name="subCategory"
-                                        value={subCategory.subCategoryId}
+                                        name={`subCategory${subCategory.subCategoryId}`}
+                                        value={subCategory.subCategoryName}
+                                        {...register(`subCategories.${subCategory.subCategoryId}.name`)}
                                     />
                                 </div>
+                                {
+                                   <SubProducts subCategoryId={subCategory.subCategoryId}/>
+                                }
                             </Wrapper>
                     ))
                     )

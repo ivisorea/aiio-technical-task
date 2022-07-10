@@ -62,3 +62,6 @@ export const SubCategoriesContainer = styled(ProductsContainer)`
 export const SubCategoriesWrapper = styled(SubContainer)`
     background-color: #dedede;
 `
+export const SubProductsContainer = styled(SubCategoriesContainer)`
+    background-color: #9c9c9c;
+`
