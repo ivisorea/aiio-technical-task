@@ -5,6 +5,7 @@ import AppState, { useAppContext } from '../AppContext/appContext'
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form'
 import { Modal } from './Modal';
 import { useState } from 'react'
+import { SelectionOverview } from './SelectionOverview'
 
 
 export const Products = () => {
@@ -61,19 +62,7 @@ export const Products = () => {
         {
             !!openModal && 
                 <Modal>
-                    <h3>Products</h3>
-                    <p>{selectedData.products.filter(product => product.name).map(product => product.name).join(', ')}</p>
-                    <h3>Sub categories</h3>
-                    <p>{selectedData.subCategories.filter(subCategory => subCategory.name).map(subCategory => subCategory.name).join(', ')}</p>
-                    <h3>Sub products</h3>
-                    <p>{selectedData.subProducts.filter(subProduct => subProduct.name).map(subProduct => subProduct.name).join(', ')}</p>
-                    <div style={{display: 'flex', justifyContent: 'flex-end' }}>
-                    <button 
-                        style={{backgroundColor: 'white', color: '#5774b6', fontWeight: 'bold', border: 'none', marginTop: '1rem', }}
-                        onClick={() => setOpenModal(false)}>
-                            SAVE
-                    </button>
-                    </div>
+                    <SelectionOverview selectedData={selectedData}/>
                 </Modal>
                     
     }
