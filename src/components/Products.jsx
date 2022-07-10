@@ -17,7 +17,6 @@ export const Products = () => {
         name: 'products',
     });
     const [selectedData, setSelectedData] = useState({})
-
    const onSubmit = (data) => {
         setSelectedData(data)
         setOpenModal(true)
@@ -49,7 +48,7 @@ export const Products = () => {
                                     />
                                     </div>
                                     {
-                                            <SubCategories productId={product.productId}/>
+                                      <SubCategories productId={product.productId}/>
                                     }
                                 </Wrapper>
                             ))

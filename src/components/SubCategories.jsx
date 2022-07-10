@@ -10,7 +10,7 @@ import { Button,
         ArticleWrapper} from '../styles'
 import { TiPlus } from 'react-icons/ti'
 import { BsChevronDown } from 'react-icons/bs'
-import { useFilterData } from '../AppContext/useFilterData'
+import { useFilterData } from '../utilities/hooks/useFilterData'
 import { SubProducts } from './SubProducts'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 
@@ -18,7 +18,7 @@ export const SubCategories = ({productId}) => {
     
     const [suggestions, setSuggestions] = useState([])
     const [searchValue, setSearchValue] = useState('')
-    const { data, loading } = useFilterData('http://localhost:3002/subcatergories', productId)
+    const { data, loading } = useFilterData('http://localhost:3002/subcatergories', 'productId',productId)
     const { register } = useFormContext();
     useFieldArray({name: 'subCategories' });
 

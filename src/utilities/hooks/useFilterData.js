@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-export const useFilterData2 = (url, option) => {
+export const useFilterData = (url, key, value) => {
     const [ data, setData ] = useState()
     const [ loading, setLoading ] = useState(true)
    
@@ -10,7 +10,7 @@ export const useFilterData2 = (url, option) => {
             const fetchData = async () => {
                 const res = await fetch(url)
                 const data = await res.json()
-                const filteredData = data.filter(item => item.subCategoryId === option)
+                const filteredData = data.filter(item => item[key] === value)
                 setData(filteredData)
                 setLoading(false)
             }
@@ -18,7 +18,7 @@ export const useFilterData2 = (url, option) => {
         } catch (error) {
             console.log(error)
         }
-    }, [option, url])
+    }, [value, url,key])
 
     return { data, loading }
 }
