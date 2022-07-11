@@ -4,39 +4,46 @@ import AppState, { useAppContext } from '../AppContext/appContext'
 import { Button } from '../styles'
 
 export const CreateSubProduct = ({setOpen}) => {
-    const { products, subCategories} = useAppContext(AppState)
+    const {subCategories} = useAppContext(AppState)
     const { register, 
-        handleSubmit: handleSubmit2,
+        handleSubmit: handleSubmitSubProduct,
         reset } = useForm()
     
-    const onSubmit = (data) => {
+    const onSubmitSubProduct = async (data) => {
+        
+        try{
+            let result = await fetch('http://localhost:8000/subproducts/',{
+                method:'post',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-type':'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+         } catch(e){
+            console.log(e)
+        }
         reset()
-        console.log('data', data)
         setOpen(false)
     }
-    
   return (
     <div>
+        <button onClick={() => setOpen(false)}>x</button>
         <h3>Create Sub Product</h3>
-            <form onSubmit={handleSubmit2(onSubmit)}>
+            <form>
                 <label>SubProduct Name
-                <input {...register('subProductName', { required: true })} />
+                <input {...register('subproductName', { required: true })} />
                 </label>
-                <select {...register('productId', { required: true })}>
-                    <option value=''>Select Product</option>
-                    {products.map(product => (
-                        <option key={product.productId} value={product.productId}>{product.productName}</option>
-                    ))}
-                </select>
-                <select {...register('subCategoryId', { required: true })}>
+                <select {...register('subcategoryId', { required: true })}>
                     <option value=''>Select Subcategory</option>
                     {subCategories.map(subCategory => (
-                        <option key={subCategory.subCategoryId} value={subCategory.subCategoryId}>{subCategory.subCategoryName}</option>
+                        <option key={subCategory.id} value={subCategory.id}>{subCategory.subcategoryName}</option>
                     ))}
                 </select>
-                <Button type='submit'>Submit</Button>
+                <Button 
+                onClick={handleSubmitSubProduct(onSubmitSubProduct)}
+                >Submit</Button>
             </form>
-
     </div>
   )
 }
