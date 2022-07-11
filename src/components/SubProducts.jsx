@@ -92,7 +92,7 @@ export const SubProducts = ({subCategoryId}) => {
         {
             !!open && 
                 <Modal>
-                    <CreateSubProduct setOpen={setOpen}/>
+                    {/* <CreateSubProduct setOpen={setOpen}/> */}
                 </Modal>
         }
     </>

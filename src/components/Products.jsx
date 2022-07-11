@@ -20,6 +20,8 @@ export const Products = () => {
     const [selectedProducts, setSelectedProducts] = useState([])
     const onSubmit = (data) => {
         setSelectedData(data)
+        console.log('data', data)
+        console.log('selectedProducts', selectedData)
         reset()
         setOpenModal(true)
         
@@ -38,7 +40,7 @@ export const Products = () => {
     <>
         <FormProvider {...methods}>
             <form onSubmit={handleSubmit(onSubmit)}>
-        <ProductsContainer>
+                <ProductsContainer>
                     <HeaderTable>
                         <ArticleWrapper>
                             <Article>Products</Article>
