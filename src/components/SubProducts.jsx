@@ -15,24 +15,27 @@ import { useFetchData } from '../utilities/hooks/useFetchData'
 import { Modal } from './Modal'
 import { CreateSubProduct } from './CreateSubProduct'
 
-export const SubProducts = ({subCategoryId}) => {
+export const SubProducts = ({id}) => {
     const [open, setOpen] = useState(false)
+    const [categorySelected, setCategorySelected] = useState('')
     const [suggestions, setSuggestions] = useState([])
     const [searchValue, setSearchValue] = useState('')
-    const { data, loading } = useFetchData('http://localhost:3008/subproducts', 'subCategoryId', subCategoryId)
+    const { data, loading } = useFetchData('http://localhost:8000/subproducts/', 'subcategoryId', id)
     const { register } = useFormContext();
     useFieldArray({name: 'subCategories' });
-
+    
     const onChangeHandler = (searchValue) => {
         let matches = []
         if (searchValue.length > 0) {
-            matches = data.filter(subProduct => subProduct.subProductName.toLowerCase().includes(searchValue.toLowerCase()))
+            matches = data.filter(subProduct => subProduct.subproductName.toLowerCase().includes(searchValue.toLowerCase()))
         }
         setSuggestions(matches)
         setSearchValue(searchValue)
     }
     const handleOnClickAddProduct = (e) => {
         e.preventDefault()
+        setCategorySelected();
+        console.log('categorySelected', categorySelected)
         setOpen(true)
     }
   return (
@@ -40,7 +43,7 @@ export const SubProducts = ({subCategoryId}) => {
         <SubProductsContainer>
             <HeaderTable>
                 <ArticleWrapper>
-                    <Article>Select subcategories</Article>
+                    <Article>Select subproducts</Article>
                 </ArticleWrapper>
                 <ButtonWrapper>
                    <BsChevronDown style={{color: 'white'}}/>
@@ -57,12 +60,12 @@ export const SubProducts = ({subCategoryId}) => {
                 {
                     suggestions.length > 0 ? (
                         suggestions.map(suggestion => (
-                            <Wrapper key={suggestion.subProductId}>
+                            <Wrapper key={suggestion.id}>
                                 <div style={{display : 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 1rem', marginBottom: '0.4rem'}}>
-                                <label>{suggestion.subProductName}</label>
+                                <label>{suggestion.subproductName}</label>
                                 <input type="checkbox"
                                     name="subProduct"
-                                    value={suggestion.subProductName}
+                                    value={suggestion.subproductName}
                                 />
                                 </div>
                             </Wrapper>
@@ -70,13 +73,13 @@ export const SubProducts = ({subCategoryId}) => {
                     ):(
                         loading ? <h1>Loading...</h1> :
                         data.map(subProduct => (
-                            <Wrapper key={subProduct.subProductId}>
+                            <Wrapper key={subProduct.id}>
                                 <div style={{display : 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 1rem', marginBottom: '0.4rem'}}>
-                                    <label>{subProduct.subProductName}</label>
+                                    <label>{subProduct.subproductName}</label>
                                     <input type="checkbox" 
-                                        name={`subProduct${subProduct.subProductId}`}
-                                        value={subProduct.subProductName}
-                                        {...register(`subProducts.${subProduct.subProductId}.name`)}
+                                        name={`subproduct${subProduct.id}`}
+                                        value={subProduct.subproductName}
+                                        {...register(`subProducts.${subProduct.id}.name`)}
                                     />
                                 </div>
                             </Wrapper>
@@ -92,7 +95,9 @@ export const SubProducts = ({subCategoryId}) => {
         {
             !!open && 
                 <Modal>
-                    {/* <CreateSubProduct setOpen={setOpen}/> */}
+                    <CreateSubProduct 
+                        setOpen={setOpen}
+                        />
                 </Modal>
         }
     </>

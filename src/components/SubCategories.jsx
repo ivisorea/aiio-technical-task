@@ -14,12 +14,12 @@ import { useFetchData } from '../utilities/hooks/useFetchData'
 import { SubProducts } from './SubProducts'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 
-export const SubCategories = ({productId}) => {
+export const SubCategories = ({id}) => {
     
     const [suggestions, setSuggestions] = useState([])
     const [searchValue, setSearchValue] = useState('')
     const [selectedSubCategories, setSelectedSubCategories] = useState([])
-    const { data, loading } = useFetchData('http://localhost:3002/subcatergories', 'productId',productId)
+    const { data, loading } = useFetchData('http://localhost:8000/subcategories/', 'productId', id)
     const { register } = useFormContext();
     useFieldArray({name: 'subCategories' });
 
@@ -27,15 +27,15 @@ export const SubCategories = ({productId}) => {
     const onChangeHandler = (searchValue) => {
         let matches = []
         if (searchValue.length > 0) {
-            matches = data.filter(subCategory => subCategory.subCategoryName.toLowerCase().includes(searchValue.toLowerCase()))
+            matches = data.filter(subCategory => subCategory.subcategoryName.toLowerCase().includes(searchValue.toLowerCase()))
         }
         setSuggestions(matches)
         setSearchValue(searchValue)
     }
 
     const handleOnClick = (e) => {
-        const categorySelected = data.filter(item => item.subCategoryName === e.target.value)[0];
-        let newCheckedValues = selectedSubCategories.filter(item => item.subCategoryName !== categorySelected.subCategoryName);
+        const categorySelected = data.filter(item => item.subcategoryName === e.target.value)[0];
+        let newCheckedValues = selectedSubCategories.filter(item => item.subcategoryName !== categorySelected.subcategoryName);
         if (e.target.checked) {
             newCheckedValues.push(categorySelected)
         };
@@ -64,12 +64,12 @@ export const SubCategories = ({productId}) => {
                 {
                     suggestions.length > 0 ? (
                         suggestions.map(suggestion => (
-                            <Wrapper key={suggestion.subCategoryId}>
+                            <Wrapper key={suggestion.id}>
                                 <div style={{display : 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 1rem', marginBottom: '0.4rem'}}>
-                                <label>{suggestion.subCategoryName}</label>
+                                <label>{suggestion.subcategoryName}</label>
                                 <input type="checkbox"
                                     name="subCategory"
-                                    value={suggestion.subCategoryName}
+                                    value={suggestion.subcategoryName}
                                 />
                                 </div>
                             </Wrapper>
@@ -77,19 +77,19 @@ export const SubCategories = ({productId}) => {
                     ):(
                         loading ? <h1>Loading...</h1> :
                         data.map(subCategory => (
-                            <Wrapper key={subCategory.subCategoryId}>
+                            <Wrapper key={subCategory.id}>
                                 <div style={{display : 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 1rem', marginBottom: '0.4rem'}}>
-                                    <label>{subCategory.subCategoryName}</label>
+                                    <label>{subCategory.subcategoryName}</label>
                                     <input type="checkbox" 
-                                        name={`subCategory${subCategory.subCategoryId}`}
-                                        value={subCategory.subCategoryName}
+                                        name={`subcategory${subCategory.id}`}
+                                        value={subCategory.subcategoryName}
                                         onClick={handleOnClick}
-                                        {...register(`subCategories.${subCategory.subCategoryId}.name`)}
+                                        {...register(`subCategories.${subCategory.id}.name`)}
                                     />
                                 </div>
                                 {
-                                  selectedSubCategories.some(item => item.subCategoryName === subCategory.subCategoryName) &&
-                                   <SubProducts subCategoryId={subCategory.subCategoryId}/>
+                                  selectedSubCategories.some(item => item.subcategoryName === subCategory.subcategoryName) &&
+                                   <SubProducts id={subCategory.id}/>
                                 }
                             </Wrapper>
                     ))

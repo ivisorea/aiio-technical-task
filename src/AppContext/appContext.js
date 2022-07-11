@@ -16,9 +16,9 @@ const AppState = ({children}) => {
         setLoading(true)
         try{
         const fetchProducts = async () => {
-            const res = await fetch('http://localhost:3001/products')
+            const res = await fetch('http://localhost:8000/products/')
             const data = await res.json()
-            setProducts(data)
+            setProducts(data.results)
             setLoading(false)
         }
         fetchProducts()
@@ -31,9 +31,9 @@ const AppState = ({children}) => {
         setLoading(true)
         try{
         const fetchProducts = async () => {
-            const res = await fetch('http://localhost:3002/subcatergories')
+            const res = await fetch('http://localhost:8000/subcategories/')
             const data = await res.json()
-            setSubCategories(data)
+            setSubCategories(data.results)
             setLoading(false)
         }
         fetchProducts()

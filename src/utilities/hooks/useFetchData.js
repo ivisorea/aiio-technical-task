@@ -10,7 +10,7 @@ export const useFetchData = (url, key, value) => {
             const fetchData = async () => {
                 const res = await fetch(url)
                 const data = await res.json()
-                const filteredData = data.filter(item => item[key] === value)
+                const filteredData = data.results.filter(item => item[key] === value)
                 setData(filteredData)
                 setLoading(false)
             }

@@ -11,7 +11,7 @@ import { SelectionOverview } from './SelectionOverview'
 export const Products = () => {
     const { products, loading, setOpenModal, openModal} = useAppContext(AppState)
     const methods = useForm();
-    const {register, handleSubmit, reset} = methods;
+    const {register, handleSubmit} = methods;
     useFieldArray({
         control: methods.control,
         name: 'products',
@@ -20,9 +20,6 @@ export const Products = () => {
     const [selectedProducts, setSelectedProducts] = useState([])
     const onSubmit = (data) => {
         setSelectedData(data)
-        console.log('data', data)
-        console.log('selectedProducts', selectedData)
-        reset()
         setOpenModal(true)
         
     }
@@ -52,18 +49,18 @@ export const Products = () => {
                     <SubContainer>
                         {loading ? <h1>Loading...</h1> :
                             products.map(product => (
-                                <Wrapper key={product.productId}>
+                                <Wrapper key={product.id}>
                                     <div style={{display : 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 1rem', marginBottom: '0.4rem'}}>
                                     <label>{product.productName}</label>
                                     <input type="checkbox" 
-                                        name={`product${product.productId}`}
+                                        name={`product${product.id}`}
                                         value={product.productName}
                                         onClick={handleOnClick}
-                                        {...register(`products.${product.productId}.name`)}
+                                        {...register(`products.${product.id}.name`)}
                                     />
                                     </div>
                                     {
-                                        selectedProducts.some(item => item.productId === product.productId) && <SubCategories productId={product.productId}/>
+                                        selectedProducts.some(item => item.id === product.id) && <SubCategories id={product.id}/>
                                     }
                                 </Wrapper>
                             ))
@@ -79,7 +76,8 @@ export const Products = () => {
         {
             !!openModal && 
                 <Modal>
-                    <SelectionOverview selectedData={selectedData}/>
+                    <SelectionOverview 
+                        selectedData={selectedData}/>
                 </Modal>
         }
             
