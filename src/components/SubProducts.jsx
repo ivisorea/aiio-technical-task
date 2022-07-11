@@ -12,8 +12,11 @@ import { TiPlus } from 'react-icons/ti'
 import { BsChevronDown } from 'react-icons/bs'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { useFetchData } from '../utilities/hooks/useFetchData'
+import { Modal } from './Modal'
+import { CreateSubProduct } from './CreateSubProduct'
 
 export const SubProducts = ({subCategoryId}) => {
+    const [open, setOpen] = useState(false)
     const [suggestions, setSuggestions] = useState([])
     const [searchValue, setSearchValue] = useState('')
     const { data, loading } = useFetchData('http://localhost:3008/subproducts', 'subCategoryId', subCategoryId)
@@ -28,9 +31,13 @@ export const SubProducts = ({subCategoryId}) => {
         setSuggestions(matches)
         setSearchValue(searchValue)
     }
-
+    const handleOnClickAddProduct = (e) => {
+        e.preventDefault()
+        setOpen(true)
+    }
   return (
-    <SubProductsContainer>
+    <>
+        <SubProductsContainer>
             <HeaderTable>
                 <ArticleWrapper>
                     <Article>Select subcategories</Article>
@@ -77,7 +84,18 @@ export const SubProducts = ({subCategoryId}) => {
                     )
                 }
             </SubCategoriesWrapper>
-            <Button><TiPlus/>ADD PRODUCTS</Button>
+            <Button
+                type='button'
+                onClick={handleOnClickAddProduct}>
+            <TiPlus/>ADD SUBPRODUCT</Button>
         </SubProductsContainer>
+        {
+            !!open && 
+                <Modal>
+                    <CreateSubProduct setOpen={setOpen}/>
+                </Modal>
+        }
+    </>
+    
   )
 }

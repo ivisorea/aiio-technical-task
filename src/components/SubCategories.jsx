@@ -41,6 +41,8 @@ export const SubCategories = ({productId}) => {
         };
         setSelectedSubCategories(newCheckedValues);
     }
+   
+
   return (
     <SubCategoriesContainer>
             <HeaderTable>
@@ -94,7 +96,10 @@ export const SubCategories = ({productId}) => {
                     )
                 }
             </SubCategoriesWrapper>
-            <Button><TiPlus/>ADD PRODUCTS</Button>
+            <Button
+                type='button'
+                onClick={(e) => e.preventDefault()}
+            ><TiPlus/>ADD SUBCATEGORY</Button>
         </SubCategoriesContainer>
   )
 }

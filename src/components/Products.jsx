@@ -22,6 +22,7 @@ export const Products = () => {
         setSelectedData(data)
         reset()
         setOpenModal(true)
+        
     }
 
     const handleOnClick = (e) => {
@@ -37,7 +38,7 @@ export const Products = () => {
     <>
         <FormProvider {...methods}>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <ProductsContainer>
+        <ProductsContainer>
                     <HeaderTable>
                         <ArticleWrapper>
                             <Article>Products</Article>
@@ -60,14 +61,17 @@ export const Products = () => {
                                     />
                                     </div>
                                     {
-                                      selectedProducts.some(item => item.productId === product.productId) && <SubCategories productId={product.productId}/>
+                                        selectedProducts.some(item => item.productId === product.productId) && <SubCategories productId={product.productId}/>
                                     }
                                 </Wrapper>
                             ))
                         }
                     </SubContainer>
-                    <Button> <TiPlus />ADD PRODUCTS</Button>
-                </ProductsContainer>
+                    <Button
+                        type='button'
+                        onClick={(e) => e.preventDefault()}
+                    > <TiPlus />ADD PRODUCTS</Button>
+        </ProductsContainer>
             </form>
         </FormProvider>
         {
@@ -75,8 +79,7 @@ export const Products = () => {
                 <Modal>
                     <SelectionOverview selectedData={selectedData}/>
                 </Modal>
-                    
-    }
+        }
             
     </>
   )
