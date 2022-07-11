@@ -10,7 +10,7 @@ import { Button,
         ArticleWrapper} from '../styles'
 import { TiPlus } from 'react-icons/ti'
 import { BsChevronDown } from 'react-icons/bs'
-import { useFilterData } from '../utilities/hooks/useFilterData'
+import { useFetchData } from '../utilities/hooks/useFetchData'
 import { SubProducts } from './SubProducts'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 
@@ -18,9 +18,11 @@ export const SubCategories = ({productId}) => {
     
     const [suggestions, setSuggestions] = useState([])
     const [searchValue, setSearchValue] = useState('')
-    const { data, loading } = useFilterData('http://localhost:3002/subcatergories', 'productId',productId)
+    const [selectedSubCategories, setSelectedSubCategories] = useState([])
+    const { data, loading } = useFetchData('http://localhost:3002/subcatergories', 'productId',productId)
     const { register } = useFormContext();
     useFieldArray({name: 'subCategories' });
+
 
     const onChangeHandler = (searchValue) => {
         let matches = []
@@ -29,6 +31,15 @@ export const SubCategories = ({productId}) => {
         }
         setSuggestions(matches)
         setSearchValue(searchValue)
+    }
+
+    const handleOnClick = (e) => {
+        const categorySelected = data.filter(item => item.subCategoryName === e.target.value)[0];
+        let newCheckedValues = selectedSubCategories.filter(item => item.subCategoryName !== categorySelected.subCategoryName);
+        if (e.target.checked) {
+            newCheckedValues.push(categorySelected)
+        };
+        setSelectedSubCategories(newCheckedValues);
     }
   return (
     <SubCategoriesContainer>
@@ -70,10 +81,12 @@ export const SubCategories = ({productId}) => {
                                     <input type="checkbox" 
                                         name={`subCategory${subCategory.subCategoryId}`}
                                         value={subCategory.subCategoryName}
+                                        onClick={handleOnClick}
                                         {...register(`subCategories.${subCategory.subCategoryId}.name`)}
                                     />
                                 </div>
                                 {
+                                  selectedSubCategories.some(item => item.subCategoryName === subCategory.subCategoryName) &&
                                    <SubProducts subCategoryId={subCategory.subCategoryId}/>
                                 }
                             </Wrapper>

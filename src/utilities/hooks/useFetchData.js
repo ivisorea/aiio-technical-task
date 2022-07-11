@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-export const useFilterData = (url, key, value) => {
+export const useFetchData = (url, key, value) => {
     const [ data, setData ] = useState()
     const [ loading, setLoading ] = useState(true)
    

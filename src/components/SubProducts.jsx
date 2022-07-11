@@ -11,12 +11,12 @@ import { Button,
 import { TiPlus } from 'react-icons/ti'
 import { BsChevronDown } from 'react-icons/bs'
 import { useFieldArray, useFormContext } from 'react-hook-form'
-import { useFilterData } from '../utilities/hooks/useFilterData'
+import { useFetchData } from '../utilities/hooks/useFetchData'
 
 export const SubProducts = ({subCategoryId}) => {
     const [suggestions, setSuggestions] = useState([])
     const [searchValue, setSearchValue] = useState('')
-    const { data, loading } = useFilterData('http://localhost:3008/subproducts', 'subCategoryId', subCategoryId)
+    const { data, loading } = useFetchData('http://localhost:3008/subproducts', 'subCategoryId', subCategoryId)
     const { register } = useFormContext();
     useFieldArray({name: 'subCategories' });
 

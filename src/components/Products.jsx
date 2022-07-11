@@ -11,15 +11,26 @@ import { SelectionOverview } from './SelectionOverview'
 export const Products = () => {
     const { products, loading, setOpenModal, openModal} = useAppContext(AppState)
     const methods = useForm();
-    const {register, handleSubmit} = methods;
+    const {register, handleSubmit, reset} = methods;
     useFieldArray({
         control: methods.control,
         name: 'products',
     });
     const [selectedData, setSelectedData] = useState({})
-   const onSubmit = (data) => {
+    const [selectedProducts, setSelectedProducts] = useState([])
+    const onSubmit = (data) => {
         setSelectedData(data)
+        reset()
         setOpenModal(true)
+    }
+
+    const handleOnClick = (e) => {
+        const productSelected = products.filter(item => item.productName === e.target.value)[0];
+        let newCheckedValues = selectedProducts.filter(item => item.productName !== productSelected.productName);
+        if (e.target.checked) {
+            newCheckedValues.push(productSelected)
+        };
+        setSelectedProducts(newCheckedValues);
     }
 
   return (
@@ -44,11 +55,12 @@ export const Products = () => {
                                     <input type="checkbox" 
                                         name={`product${product.productId}`}
                                         value={product.productName}
+                                        onClick={handleOnClick}
                                         {...register(`products.${product.productId}.name`)}
                                     />
                                     </div>
                                     {
-                                      <SubCategories productId={product.productId}/>
+                                      selectedProducts.some(item => item.productId === product.productId) && <SubCategories productId={product.productId}/>
                                     }
                                 </Wrapper>
                             ))
