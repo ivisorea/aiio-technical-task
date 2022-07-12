@@ -75,8 +75,8 @@ export const SubProducts = ({id}) => {
                                     <CheckboxContainer styled={{backgroundColor: 'red'}}>
                                     <input type="checkbox" 
                                         name={`subproduct${subProduct.id}`}
-                                        value={subProduct.subproductName}
-                                        {...register(`subProducts.${subProduct.id}.name`)}
+                                        value={subProduct.id}
+                                        {...register(`subProducts.${subProduct.id}.subproductId`)}
                                         id={subProduct.id}
                                     />
                                     </CheckboxContainer>

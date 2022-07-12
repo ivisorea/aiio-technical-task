@@ -12,10 +12,10 @@ export const Products = () => {
     const { products, loading, setOpenModal, openModal} = useAppContext(AppState)
     const methods = useForm();
     const {register, handleSubmit, reset} = methods;
-    useFieldArray({
-        control: methods.control,
-        name: 'products',
-    });
+    // useFieldArray({
+    //     control: methods.control,
+    //     name: 'products',
+    // });
     const [selectedData, setSelectedData] = useState({})
     const [selectedProducts, setSelectedProducts] = useState(['', ''])
     

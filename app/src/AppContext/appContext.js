@@ -7,6 +7,7 @@ export const useAppContext = () => useContext(AppContext)
 const AppState = ({children}) => {
     const [products, setProducts] = useState([])
     const [subCategories, setSubCategories] = useState([])
+    const [subProducts, setSubProducts] = useState([])
     const [loading, setLoading] = useState(false)
     const [openModal, setOpenModal] = useState(false)
     const [selectedSubCategoriesGlobal, setSelectedSubCategoriesGlobal] = useState([])
@@ -29,18 +30,32 @@ const AppState = ({children}) => {
     useEffect(() => {
         setLoading(true)
         try{
-        const fetchProducts = async () => {
+        const fetchSubCategories = async () => {
             const res = await fetch('http://localhost:8000/subcategories/')
             const data = await res.json()
             setSubCategories(data.results)
             setLoading(false)
         }
-        fetchProducts()
+        fetchSubCategories()
         } catch (error) {
         console.log(error)
         }
     }, [])
 
+    useEffect(() => {
+        setLoading(true)
+        try{
+        const fetchSubProducts = async () => {
+            const res = await fetch('http://localhost:8000/subproducts/')
+            const data = await res.json()
+            setSubProducts(data.results)
+            setLoading(false)
+        }
+        fetchSubProducts()
+        } catch (error) {
+        console.log(error)
+        }
+    }, [])
 
     const postData = async(url, data) => {
         try{
@@ -65,6 +80,7 @@ const AppState = ({children}) => {
             openModal, 
             setOpenModal, 
             subCategories,
+            subProducts,
             selectedSubCategoriesGlobal,
             setSelectedSubCategoriesGlobal
             }}>
