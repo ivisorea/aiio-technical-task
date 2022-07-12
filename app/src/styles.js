@@ -49,8 +49,50 @@ export const ArticleWrapper = styled.div`
 export const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
-    padding: .4rem;
+    padding: 1rem .5rem;
     width: 100%;
+    justify-content: center;
+    
+    input:checked {
+        accent-color: #00a9d5;
+}
+`
+export const WrapperSubCategories = styled(Wrapper)`
+    :hover {
+        cursor: pointer;
+}
+
+`
+export const WrapperSubProducts = styled(WrapperSubCategories)`
+    width: 95%;
+    :hover {
+        border-top: 1px solid #f8fcfe;
+        border-bottom: 1px solid #f8fcfe;
+        background-color: #dfe4e5;
+}
+`
+
+export const CheckboxContainer = styled.div`
+    border: none;
+    border-radius: 50%;
+    width: 1.9rem;
+    height: 1.9rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    :hover{
+        background-color: #d8dcdd; 
+    }     
+    input:hover{
+        cursor: pointer;
+    }
+`
+export const InputContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem; 
+    margin-bottom: 0.4rem
 `
 export const SubCategoriesContainer = styled(ProductsContainer)`
     display: flex;
@@ -62,6 +104,10 @@ export const SubCategoriesContainer = styled(ProductsContainer)`
 export const SubCategoriesWrapper = styled(SubContainer)`
     background-color: #dedede;
 `
+export const SubProductsWrapper = styled(SubContainer)`
+    background-color: #e9edee;
+`
+
 export const SubProductsContainer = styled(SubCategoriesContainer)`
     background-color: #9c9c9c;
 `
@@ -69,7 +115,7 @@ export const ModalContainer = styled.div`
     background-color: #fdfdfd;
     border-radius: 3px;
     box-shadow: 0px 5px 50px rgba(189, 191, 195, 0.25);
-    padding: 1.5rem;
+    padding: .5rem 1.5rem 1.5rem 1.5rem;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -77,7 +123,20 @@ export const ModalContainer = styled.div`
     z-index: 1;
     display: flex;
     flex-direction: column;
+    overflow: auto;
+`
+export const NotFoundContainer = styled.div`
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    overflow: auto;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+`
+
+export const SearchContainer = styled.div`
+
 `

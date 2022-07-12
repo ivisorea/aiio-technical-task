@@ -51,10 +51,26 @@ const AppState = ({children}) => {
         setSelectedProducts(newCheckedValues);
     }
 
+    const postData = async(url, data) => {
+        try{
+            await fetch('http://localhost:8000/subproducts/',{
+                method:'post',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-type':'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+        } catch(e){
+                console.log(e)
+            }
+    }
+
     return (
         <AppContext.Provider value={
             {products, 
             loading, 
+            postData,
             openModal, 
             setOpenModal, 
             subCategories,

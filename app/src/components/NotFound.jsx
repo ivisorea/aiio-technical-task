@@ -1,7 +1,10 @@
 import React from 'react'
+import { NotFoundContainer } from '../styles'
 
 export const NotFound = () => {
   return (
-    <div>NotFound</div>
+    <NotFoundContainer>
+      <h1>Upps!!</h1>
+    </NotFoundContainer>
   )
 }

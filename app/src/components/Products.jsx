@@ -1,4 +1,4 @@
-import { Button, ProductsContainer, HeaderTable, SubContainer, Article, Wrapper, ButtonWrapper, ArticleWrapper } from '../styles'
+import { Button, ProductsContainer, HeaderTable, SubContainer, Article, Wrapper, ButtonWrapper, ArticleWrapper, InputContainer } from '../styles'
 import { SubCategories } from './SubCategories'
 import {TiPlus} from 'react-icons/ti'
 import AppState, { useAppContext } from '../AppContext/appContext'
@@ -11,7 +11,7 @@ import { SelectionOverview } from './SelectionOverview'
 export const Products = () => {
     const { products, loading, setOpenModal, openModal} = useAppContext(AppState)
     const methods = useForm();
-    const {register, handleSubmit} = methods;
+    const {register, handleSubmit, reset} = methods;
     useFieldArray({
         control: methods.control,
         name: 'products',
@@ -21,6 +21,7 @@ export const Products = () => {
     const onSubmit = (data) => {
         setSelectedData(data)
         setOpenModal(true)
+        reset()
     }
 
     const handleOnClick = (e) => {
@@ -49,15 +50,16 @@ export const Products = () => {
                         {loading ? <h1>Loading...</h1> :
                             products.map(product => (
                                 <Wrapper key={product.id}>
-                                    <div style={{display : 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 1rem', marginBottom: '0.4rem'}}>
-                                    <label>{product.productName}</label>
-                                    <input type="checkbox" 
-                                        name={`product${product.id}`}
-                                        value={product.productName}
-                                        onClick={handleOnClick}
-                                        {...register(`products.${product.id}.name`)}
-                                    />
-                                    </div>
+                                    <InputContainer>
+                                        <label>{product.productName}</label>
+                                        <input 
+                                            type="checkbox" 
+                                            name={`product${product.id}`}
+                                            value={product.productName}
+                                            onClick={handleOnClick}
+                                            {...register(`products.${product.id}.name`)}
+                                        />
+                                    </InputContainer>
                                     {
                                         selectedProducts.some(item => item.id === product.id) && <SubCategories id={product.id}/>
                                     }

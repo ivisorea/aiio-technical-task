@@ -3,17 +3,21 @@ import { useState} from 'react'
 import { Button, 
         SubProductsContainer, 
         HeaderTable, 
-        SubCategoriesWrapper, 
+        SubProductsWrapper, 
         Article, 
-        Wrapper, 
+        WrapperSubProducts, 
         ButtonWrapper, 
-        ArticleWrapper } from '../styles'
+        CheckboxContainer,
+        ArticleWrapper,
+        InputContainer, 
+        } from '../styles'
 import { TiPlus } from 'react-icons/ti'
 import { BsChevronDown } from 'react-icons/bs'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { useFetchData } from '../utilities/hooks/useFetchData'
 import { Modal } from './Modal'
 import { CreateSubProduct } from './CreateSubProduct'
+import { Search } from './Search'
 
 export const SubProducts = ({id}) => {
     const [open, setOpen] = useState(false)
@@ -24,14 +28,6 @@ export const SubProducts = ({id}) => {
     const { register } = useFormContext();
     useFieldArray({name: 'subCategories' });
     
-    const onChangeHandler = (searchValue) => {
-        let matches = []
-        if (searchValue.length > 0) {
-            matches = data.filter(subProduct => subProduct.subproductName.toLowerCase().includes(searchValue.toLowerCase()))
-        }
-        setSuggestions(matches)
-        setSearchValue(searchValue)
-    }
     const handleOnClickAddProduct = (e) => {
         e.preventDefault()
         setCategorySelected();
@@ -49,44 +45,46 @@ export const SubProducts = ({id}) => {
                    <BsChevronDown style={{color: 'white'}}/>
                 </ButtonWrapper>
             </HeaderTable>
-            <SubCategoriesWrapper>
-                <input 
-                style={{with: '100%', height: '2rem', border: '1px solid #ccc', borderRadius: '0.2rem', padding: '0.5rem'}}
-                type='search' 
-                placeholder='search'
-                value={searchValue}
-                onChange={(e) => onChangeHandler(e.target.value)}
+            <SubProductsWrapper>
+                <Search
+                    data={data}
+                    key={'subproductName'}
+                    setSuggestions={setSuggestions}
+                    setSearchValue={setSearchValue}
+                    searchValue={searchValue}
                 />
                 {
                     suggestions.length > 0 ? (
                         suggestions.map(suggestion => (
-                            <Wrapper key={suggestion.id}>
-                                <div style={{display : 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 1rem', marginBottom: '0.4rem'}}>
+                            <WrapperSubProducts key={suggestion.id}>
+                                <InputContainer>
                                 <label>{suggestion.subproductName}</label>
                                 <input type="checkbox"
                                     name="subProduct"
                                     value={suggestion.subproductName}
                                 />
-                                </div>
-                            </Wrapper>
+                                </InputContainer>
+                            </WrapperSubProducts>
                         ))
                     ):(
                         loading ? <h1>Loading...</h1> :
                         data.map(subProduct => (
-                            <Wrapper key={subProduct.id}>
-                                <div style={{display : 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 1rem', marginBottom: '0.4rem'}}>
+                            <WrapperSubProducts key={subProduct.id}>
+                                <InputContainer>
                                     <label>{subProduct.subproductName}</label>
+                                    <CheckboxContainer styled={{backgroundColor: 'red'}}>
                                     <input type="checkbox" 
                                         name={`subproduct${subProduct.id}`}
                                         value={subProduct.subproductName}
                                         {...register(`subProducts.${subProduct.id}.name`)}
                                     />
-                                </div>
-                            </Wrapper>
+                                    </CheckboxContainer>
+                                </InputContainer>
+                            </WrapperSubProducts>
                     ))
                     )
                 }
-            </SubCategoriesWrapper>
+            </SubProductsWrapper>
             <Button
                 type='button'
                 onClick={handleOnClickAddProduct}>
