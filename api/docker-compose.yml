@@ -22,8 +22,6 @@ services:
     build: ../app
     container_name: app
     command: npm start
-    volumes:
-      - ../app:/app
     ports:
       - "3000:3000"
     stdin_open: true
