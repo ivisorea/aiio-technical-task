@@ -1,21 +1,28 @@
 import React from 'react'
 import AppState, { useAppContext } from '../AppContext/appContext'
 
-export const SelectionOverview = ({selectedData}) => {
+export const SelectionOverview = ({selectedData, selectedProducts}) => {
     const { setOpenModal } = useAppContext(AppState)
     const handleOnClickSave = () => {
         setOpenModal(false)
     }
+
   return (
     <>
         <h3>Products</h3>
+        {selectedProducts.length > 0 ?
         <p>{selectedData.products.filter(product => product.name).map(product => product.name).join(', ')}</p>
-        
+        : <p>No products selected</p>}
+
         <h3>Sub categories</h3>
+        {selectedData.subCategories === undefined && selectedData.subCategories.some(item => item.name !== false)
+        ? <p>No sub categories selected</p> :
         <p>{selectedData.subCategories.filter(subCategory => subCategory.name).map(subCategory => subCategory.name).join(', ')}</p>
+        }
         
         <h3>Sub products</h3>
-        <p>{selectedData.subProducts.filter(subProduct => subProduct.name).map(subProduct => subProduct.name).join(', ')}</p>
+        {selectedData.subProducts === undefined ? <p>No sub products selected</p> :
+        <p>{selectedData.subProducts.filter(subProduct => subProduct.name).map(subProduct => subProduct.name).join(', ')}</p>}
 
         <div style={{display: 'flex', justifyContent: 'flex-end' }}>
 

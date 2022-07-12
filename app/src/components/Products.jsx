@@ -21,7 +21,6 @@ export const Products = () => {
     const onSubmit = (data) => {
         setSelectedData(data)
         setOpenModal(true)
-        
     }
 
     const handleOnClick = (e) => {
@@ -77,7 +76,9 @@ export const Products = () => {
             !!openModal && 
                 <Modal>
                     <SelectionOverview 
-                        selectedData={selectedData}/>
+                        selectedData={selectedData}
+                        selectedProducts={selectedProducts}
+                        />
                 </Modal>
         }
             
