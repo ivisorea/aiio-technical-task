@@ -10,7 +10,7 @@ WORKDIR /code
 
 # install dependencies  
 RUN pip install --upgrade pip  
-COPY /api/requirements.txt /code/
+COPY /requirements.txt /code/
 RUN pip install -r requirements.txt  
 
 # port where the Django app runs  

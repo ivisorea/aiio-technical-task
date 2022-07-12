@@ -16,24 +16,22 @@ import { BsChevronDown } from 'react-icons/bs'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { useFetchData } from '../utilities/hooks/useFetchData'
 import { Modal } from './Modal'
-import { CreateSubProduct } from './CreateSubProduct'
+import { CreateSubProduct } from './FormAddSubProduct'
 import { Search } from './Search'
 
 export const SubProducts = ({id}) => {
     const [open, setOpen] = useState(false)
-    const [categorySelected, setCategorySelected] = useState('')
     const [suggestions, setSuggestions] = useState([])
     const [searchValue, setSearchValue] = useState('')
     const { data, loading } = useFetchData('http://localhost:8000/subproducts/', 'subcategoryId', id)
     const { register } = useFormContext();
-    useFieldArray({name: 'subCategories' });
+    useFieldArray({name: 'subProducts' });
     
     const handleOnClickAddProduct = (e) => {
         e.preventDefault()
-        setCategorySelected();
-        console.log('categorySelected', categorySelected)
         setOpen(true)
     }
+
   return (
     <>
         <SubProductsContainer>
@@ -62,6 +60,8 @@ export const SubProducts = ({id}) => {
                                 <input type="checkbox"
                                     name="subProduct"
                                     value={suggestion.subproductName}
+                                    {...register(`subProducts.${suggestion.id}.name`)}
+                                    id={suggestion.id}
                                 />
                                 </InputContainer>
                             </WrapperSubProducts>
@@ -77,6 +77,7 @@ export const SubProducts = ({id}) => {
                                         name={`subproduct${subProduct.id}`}
                                         value={subProduct.subproductName}
                                         {...register(`subProducts.${subProduct.id}.name`)}
+                                        id={subProduct.id}
                                     />
                                     </CheckboxContainer>
                                 </InputContainer>

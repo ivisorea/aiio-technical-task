@@ -92,7 +92,7 @@ export const InputContainer = styled.div`
     justify-content: space-between;
     align-items: center;
     padding: 0 1rem; 
-    margin-bottom: 0.4rem
+    margin-bottom: 0.4rem;
 `
 export const SubCategoriesContainer = styled(ProductsContainer)`
     display: flex;

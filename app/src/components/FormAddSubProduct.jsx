@@ -9,14 +9,14 @@ export const CreateSubProduct = ({setOpen}) => {
     const { register, 
         handleSubmit: handleSubmitSubProduct,
         reset } = useForm()
-    const onSubmitSubProduct = async (data) => {
-    const url = 'http://localhost:8000/subproducts/'
-    postData(url, data)
-    
+
+    const onSubmitSubProduct = (data) => {
+        const url = 'http://localhost:8000/subproducts/'
+        postData(url, data)
         reset()
         setOpen(false)
     }
-      
+
   return (
     <div>
         <CloseButton setOpen={setOpen}/>

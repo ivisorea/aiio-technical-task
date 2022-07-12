@@ -9,7 +9,6 @@ const AppState = ({children}) => {
     const [subCategories, setSubCategories] = useState([])
     const [loading, setLoading] = useState(false)
     const [openModal, setOpenModal] = useState(false)
-    const [selectedProducts, setSelectedProducts] = useState([])
     const [selectedSubCategoriesGlobal, setSelectedSubCategoriesGlobal] = useState([])
     
     useEffect(() => {
@@ -42,18 +41,10 @@ const AppState = ({children}) => {
         }
     }, [])
 
-    const getSelectedProducts = (e) => {
-        const productSelected = products.filter(item => item.productName === e.target.value)[0];
-        let newCheckedValues = selectedProducts.filter(item => item.productName !== productSelected.productName);
-        if (e.target.checked) {
-            newCheckedValues.push(productSelected)
-        };
-        setSelectedProducts(newCheckedValues);
-    }
 
     const postData = async(url, data) => {
         try{
-            await fetch('http://localhost:8000/subproducts/',{
+            await fetch(url,{
                 method:'post',
                 headers: {
                     'Accept': 'application/json',
@@ -74,8 +65,6 @@ const AppState = ({children}) => {
             openModal, 
             setOpenModal, 
             subCategories,
-            selectedProducts, 
-            getSelectedProducts,
             selectedSubCategoriesGlobal,
             setSelectedSubCategoriesGlobal
             }}>

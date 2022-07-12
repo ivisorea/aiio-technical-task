@@ -17,7 +17,8 @@ export const Products = () => {
         name: 'products',
     });
     const [selectedData, setSelectedData] = useState({})
-    const [selectedProducts, setSelectedProducts] = useState([])
+    const [selectedProducts, setSelectedProducts] = useState(['', ''])
+    
     const onSubmit = (data) => {
         setSelectedData(data)
         setOpenModal(true)
@@ -25,8 +26,9 @@ export const Products = () => {
     }
 
     const handleOnClick = (e) => {
-        const productSelected = products.filter(item => item.productName === e.target.value)[0];
-        let newCheckedValues = selectedProducts.filter(item => item.productName !== productSelected.productName);
+        // eslint-disable-next-line eqeqeq
+        const productSelected = products.filter(item => item.id == e.target.id)[0];
+        let newCheckedValues = selectedProducts.filter(item => item.id !== productSelected.id);
         if (e.target.checked) {
             newCheckedValues.push(productSelected)
         };
@@ -57,6 +59,7 @@ export const Products = () => {
                                             name={`product${product.id}`}
                                             value={product.productName}
                                             onClick={handleOnClick}
+                                            id={product.id}
                                             {...register(`products.${product.id}.name`)}
                                         />
                                     </InputContainer>
@@ -71,7 +74,7 @@ export const Products = () => {
                         type='button'
                         onClick={(e) => e.preventDefault()}
                     > <TiPlus />ADD PRODUCTS</Button>
-        </ProductsContainer>
+                </ProductsContainer>
             </form>
         </FormProvider>
         {

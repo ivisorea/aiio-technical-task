@@ -9,21 +9,21 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
   api:
-    build: ./api
+    build: .
     container_name: api
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - ./api:/code
+      - .:/code
     ports:
       - "8000:8000"
     depends_on:
       - db
   app:
-    build: ./app
+    build: ../app
     container_name: app
     command: npm start
     volumes:
-      - ./app:/app
+      - ../app:/app
     ports:
       - "3000:3000"
     stdin_open: true

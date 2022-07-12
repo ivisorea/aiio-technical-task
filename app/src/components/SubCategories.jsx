@@ -25,8 +25,9 @@ export const SubCategories = ({id}) => {
     useFieldArray({name: 'subCategories' });
 
     const handleOnClick = (e) => {
-        const categorySelected = data.filter(item => item.subcategoryName === e.target.value)[0];
-        let newCheckedValues = selectedSubCategories.filter(item => item.subcategoryName !== categorySelected.subcategoryName);
+        // eslint-disable-next-line eqeqeq
+        const categorySelected = data.filter(item => item.id == e.target.id)[0];
+        let newCheckedValues = selectedSubCategories.filter(item => item.id !== categorySelected.id);
         if (e.target.checked) {
             newCheckedValues.push(categorySelected)
         };
@@ -60,6 +61,8 @@ export const SubCategories = ({id}) => {
                                     <input type="checkbox"
                                         name="subCategory"
                                         value={suggestion.subcategoryName}
+                                        {...register(`subCategories.${suggestion.id}.name`)}
+                                        id={suggestion.id}
                                     />
                                 </InputContainer>
                             </WrapperSubCategories>
@@ -75,10 +78,11 @@ export const SubCategories = ({id}) => {
                                         value={subCategory.subcategoryName}
                                         onClick={handleOnClick}
                                         {...register(`subCategories.${subCategory.id}.name`)}
+                                        id={subCategory.id}
                                     />
                                 </InputContainer>
                                 {
-                                  selectedSubCategories.some(item => item.subcategoryName === subCategory.subcategoryName) &&
+                                  selectedSubCategories.some(item => item.id === subCategory.id) &&
                                    <SubProducts id={subCategory.id}/>
                                 }
                             </WrapperSubCategories>
