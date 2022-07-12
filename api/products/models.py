@@ -29,3 +29,14 @@ class SubProduct(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class SelectedSubProduct(models.Model):
+    subproduct = models.ForeignKey(SubProduct, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = "Selected Subproduct"
+        verbose_name_plural = "Selected Subproducts"
+
+    def __str__(self):
+        return self.subproduct.name

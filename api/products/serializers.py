@@ -1,4 +1,4 @@
-from .models import Product, SubCategory, SubProduct
+from .models import Product, SubCategory, SubProduct, SelectedSubProduct
 from rest_framework import serializers
 
 
@@ -33,3 +33,13 @@ class SubProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = SubProduct
         fields = ['id', 'subproductName', 'subcategoryId']
+
+class SelectedSubProductSerializer(serializers.ModelSerializer):
+    subproductId = serializers.PrimaryKeyRelatedField(
+        queryset=SubProduct.objects.all(),
+        source='subproduct'
+    )
+
+    class Meta:
+        model = SelectedSubProduct
+        fields = ['id', 'subproductId']

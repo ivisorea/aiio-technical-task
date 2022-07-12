@@ -1,6 +1,6 @@
-from .models import Product, SubCategory, SubProduct
+from .models import Product, SubCategory, SubProduct, SelectedSubProduct
 from rest_framework import viewsets
-from .serializers import ProductSerializer, SubCategorySerializer, SubProductSerializer
+from .serializers import ProductSerializer, SubCategorySerializer, SubProductSerializer, SelectedSubProductSerializer
 
 
 class ProductViewSet(viewsets.ModelViewSet):
@@ -32,3 +32,11 @@ class SubProductViewSet(viewsets.ModelViewSet):
     # remove to force authentication to access API
     # permission_classes = [permissions.IsAuthenticated]
 
+class SelectedSubProductViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows SelectedSubproduct to be viewed or edited.
+    """
+    queryset = SelectedSubProduct.objects.all()
+    serializer_class = SelectedSubProductSerializer
+    # remove to force authentication to access API
+    # permission_classes = [permissions.IsAuthenticated]

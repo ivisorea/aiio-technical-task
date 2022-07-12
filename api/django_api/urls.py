@@ -22,6 +22,7 @@ router = routers.DefaultRouter()
 router.register(r'products', views.ProductViewSet)
 router.register(r'subcategories', views.SubCategoryViewSet)
 router.register(r'subproducts', views.SubProductViewSet)
+router.register(r'selected-subproducts', views.SelectedSubProductViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
