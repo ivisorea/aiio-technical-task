@@ -12,18 +12,16 @@ export const SelectionOverview = ({selectedData, selectedProducts}) => {
     <>
         <CloseButton setOpen={setOpenModal}/>
         <h3>Products</h3>
-        {selectedProducts.length > 0 ?
-        <p>{selectedData.products.filter(product => product.name).map(product => product.name).join(', ')}</p>
-        : <p>No products selected</p>}
+        {selectedProducts.length > 0 &&
+        <p>{selectedData.products.filter(product => product.name).map(product => product.name).join(', ')}</p>}
 
         <h3>Sub categories</h3>
-        {selectedData.subCategories === undefined
-        ? <p>No sub categories selected</p> :
+        {selectedData.subCategories !== undefined &&
         <p>{selectedData.subCategories.filter(subCategory => subCategory.name).map(subCategory => subCategory.name).join(', ')}</p>
         }
         
         <h3>Sub products</h3>
-        {selectedData.subProducts === undefined ? <p>No sub products selected</p> :
+        {selectedData.subProducts !== undefined &&
         <p>{selectedData.subProducts.filter(subProduct => subProduct.name).map(subProduct => subProduct.name).join(', ')}</p>}
 
         <div style={{display: 'flex', justifyContent: 'flex-end' }}>

@@ -48,7 +48,7 @@ export const SubProducts = ({id}) => {
             <SubProductsWrapper>
                 <Search
                     data={data}
-                    key={'subproductName'}
+                    params={'subproductName'}
                     setSuggestions={setSuggestions}
                     setSearchValue={setSearchValue}
                     searchValue={searchValue}

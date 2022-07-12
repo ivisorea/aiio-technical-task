@@ -37,7 +37,7 @@ export const SubCategories = ({id}) => {
     <SubCategoriesContainer>
             <HeaderTable>
                 <ArticleWrapper>
-                    <Article>Select subcategories</Article>
+                    <Article>Select Subcategories</Article>
                 </ArticleWrapper>
                 <ButtonWrapper>
                    <BsChevronDown style={{color: 'white'}}/>
@@ -46,7 +46,7 @@ export const SubCategories = ({id}) => {
             <SubCategoriesWrapper>
                 <Search
                     data={data}
-                    key={'subcategoryName'}
+                    params={'subcategoryName'}
                     setSuggestions={setSuggestions}
                     setSearchValue={setSearchValue}
                     searchValue={searchValue}

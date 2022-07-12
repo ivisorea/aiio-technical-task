@@ -138,5 +138,17 @@ export const NotFoundContainer = styled.div`
 `
 
 export const SearchContainer = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: .5rem;
+    input{
+        width: 97%;
+        border: 1px solid #d7d7d7;
+        border-radius: 0.2rem;
+        padding: 0.5rem;
+        color: #d7d7d7;
 
+    }
 `
