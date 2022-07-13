@@ -1,0 +1,162 @@
+[
+    {
+        "model": "products.subproduct",
+        "pk": 1,
+        "fields": {
+            "name": "Blue Collectors",
+            "subcategory": 1
+        }
+    },
+    {
+        "model": "products.subproduct",
+        "pk": 2,
+        "fields": {
+            "name": "Red Collectors",
+            "subcategory": 1
+        }
+    },
+    {
+        "model": "products.subproduct",
+        "pk": 3,
+        "fields": {
+            "name": "Yellow Collectors",
+            "subcategory": 2
+        }
+    },
+    {
+        "model": "products.subproduct",
+        "pk": 4,
+        "fields": {
+            "name": "White Collectors",
+            "subcategory": 2
+        }
+    },
+    {
+        "model": "products.subproduct",
+        "pk": 5,
+        "fields": {
+            "name": "Black Collectors",
+            "subcategory": 3
+        }
+    },
+    {
+        "model": "products.subproduct",
+        "pk": 6,
+        "fields": {
+            "name": "Green Collectors",
+            "subcategory": 3
+        }
+    },
+    {
+        "model": "products.subproduct",
+        "pk": 7,
+        "fields": {
+            "name": "Orange Collectors",
+            "subcategory": 4
+        }
+    },
+    {
+        "model": "products.subproduct",
+        "pk": 8,
+        "fields": {
+            "name": "Purple Collectors",
+            "subcategory": 4
+        }
+    },
+    {
+        "model": "products.subproduct",
+        "pk": 9,
+        "fields": {
+            "name": "Wheat Collectors",
+            "subcategory": 5
+        }
+    },
+    {
+        "model": "products.subproduct",
+        "pk": 10,
+        "fields": {
+            "name": "Current Collectors",
+            "subcategory": 5
+        }
+    },
+    {
+        "model": "products.subproduct",
+        "pk": 11,
+        "fields": {
+            "name": "Blue Collectors",
+            "subcategory": 6
+        }
+    },
+    {
+        "model": "products.subproduct",
+        "pk": 12,
+        "fields": {
+            "name": "Red Collectors",
+            "subcategory": 6
+        }
+    },
+    {
+        "model": "products.subproduct",
+        "pk": 13,
+        "fields": {
+            "name": "Yellow Collectors",
+            "subcategory": 7
+        }
+    },
+    {
+        "model": "products.subproduct",
+        "pk": 14,
+        "fields": {
+            "name": "White Collectors",
+            "subcategory": 7
+        }
+    },
+    {
+        "model": "products.subproduct",
+        "pk": 15,
+        "fields": {
+            "name": "Black Collectors",
+            "subcategory": 8
+        }
+    },
+    {
+        "model": "products.subproduct",
+        "pk": 16,
+        "fields": {
+            "name": "Green Collectors",
+            "subcategory": 8
+        }
+    },
+    {
+        "model": "products.subproduct",
+        "pk": 17,
+        "fields": {
+            "name": "Orange Collectors",
+            "subcategory": 9
+        }
+    },
+    {
+        "model": "products.subproduct",
+        "pk": 18,
+        "fields": {
+            "name": "Purple Collectors",
+            "subcategory": 9
+        }
+    },
+    {
+        "model": "products.subproduct",
+        "pk": 19,
+        "fields": {
+            "name": "Wheat Collectors",
+            "subcategory": 10
+        }
+    },
+    {
+        "model": "products.subproduct",
+        "pk": 20,
+        "fields": {
+            "name": "Current Collectors",
+            "subcategory": 10
+        }
+    }
+]
