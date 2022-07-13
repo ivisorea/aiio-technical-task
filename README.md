@@ -11,7 +11,7 @@ Locate the docker-compose file and start the containers
 
 ```shell
 cd api
-$ docker-compose up
+docker-compose up
 ```
 This command will start the Docker environment and will run the backend and the frontend applications.
 
